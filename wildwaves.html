@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wild Waves Water Park</title>
+  </head>
+  <body>
+    <h1>Wild Waves Water Park</h1>
+    <button type="button" onclick="buyTicket()">Purchase Attraction</button>
+    <script>
+      function buyTicket() {
+        const attractionType = prompt(
+          'Which attraction do you want to visit: type "wave" for wave pool, "water" for waterslide, or "river" for lazy river?'
+        );
+        const userHeight = prompt("What is your height in inches?");
+        const isSupervised =
+          prompt("Are you with an adult? (Yes or No)").trim().toLowerCase() ===
+          "yes";
+        const attractionFormat = attractionType.trim().toLowerCase();
+
+        console.log("User's selected attraction is " + attractionFormat);
+        console.log("User's height is " + userHeight);
+        console.log("User is supervised:" + isSupervised);
+
+        const isAllowed = checkHeight(
+          attractionFormat,
+          userHeight,
+          isSupervised
+        );
+
+        if (isAllowed) {
+          console.log("Your height meets the requirements.");
+        } else {
+          console.log("Your height does not meet the requirements.");
+        }
+      }
+
+      const WAVE_POOL_MIN_HEIGHT = 42; // in inches
+      const WATERSLIDE_MIN_HEIGHT = 48; // in inches
+      const LAZY_RIVER_MIN_HEIGHT = 36; // in inches
+
+      function checkHeight(attraction, height, supervised) {
+        if (supervised && height >= 43) {
+          return true;
+        }
+
+        if (attraction === "wave") {
+          return height >= WAVE_POOL_MIN_HEIGHT;
+        } else if (attraction === "water") {
+          return height >= WATERSLIDE_MIN_HEIGHT;
+        } else if (attraction === "river") {
+          return height >= LAZY_RIVER_MIN_HEIGHT;
+        } else {
+          return false;
+        }
+      }
+    </script>
+  </body>
+</html>
